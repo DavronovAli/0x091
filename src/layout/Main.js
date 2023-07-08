@@ -1,4 +1,5 @@
 import React from 'react'
+import Movies from '../components/Movies'
 
 export default class Main extends React.Component {
   state = {
@@ -6,7 +7,7 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    fetch("www.omdbapi.com/?apikey=fedb0abd&s=panda")
+    fetch("https://www.omdbapi.com/?apikey=fedb0abd&s=panda")
       .then(response => response.json())
       .then(data => this.setState({movies: data.Search}))
   }
@@ -14,7 +15,8 @@ export default class Main extends React.Component {
   render() {
     return (
       <div className="container content">
-        All Content
+        {this.state.movies.length ? (<Movies movies={this.state.movies} />) : <h3>Loading...</h3>}
+        
       </div>
     )
   }
