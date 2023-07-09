@@ -7,7 +7,7 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://www.omdbapi.com/?apikey=fedb0abd&s=panda")
+    fetch("https://www.omdbapi.com/?apikey=fedb0abd&s=marvel")
       .then(response => response.json())
       .then(data => this.setState({movies: data.Search}))
   }
