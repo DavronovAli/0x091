@@ -8,13 +8,14 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://www.omdbapi.com/?apikey=fedb0abd&s=universe")
+    fetch("https://www.omdbapi.com/?apikey=fedb0abd&s=panda")
       .then(response => response.json())
       .then(data => this.setState({movies: data.Search}))
   }
 
-  searchMovies = (str) => {
-    fetch(`https://www.omdbapi.com/?apikey=fedb0abd&s=${str}`)
+
+  searchMovies = (str = 'panda', type = 'all') => {
+    fetch(`https://www.omdbapi.com/?apikey=fedb0abd&s=${str}${type !== 'all' ? `&type=${type}` : '' }`)
       .then((response) => response.json())
       .then((data) => this.setState({ movies: data.Search }));
   }
@@ -22,7 +23,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <div className="container content">
-        <Search searchMovie={this.searchMovies} />
+        <Search searchMovies={this.searchMovies} />
         {this.state.movies.length ? (<Movies movies={this.state.movies} />) : <Loader />}
       </div>
     )
